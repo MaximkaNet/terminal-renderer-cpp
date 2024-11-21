@@ -20,10 +20,14 @@ target_link_libraries(<app_name> PRIVATE tren)
 
 ## Using
 Initialize Terminal Renderer
-`init()` or `init(width, height)`
+```
+tren::init();
+// or
+// tren::init(width, height);
+```
 
 Define text
-```
+```cpp
 tren::TextDef textDef;
 textDef.content = "Hello terminal renderer (tren)";
 
@@ -31,7 +35,11 @@ tren::drawText(textDef);
 ```
 
 Refresh screen
-`refresh()`
+```cpp
+tren::refresh();
+```
 
 Close Terminal renderer
-`endwin()`
+```cpp
+tren::endwin();
+```
