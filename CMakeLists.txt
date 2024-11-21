@@ -7,7 +7,7 @@ project(renderer LANGUAGES CXX)
 
 # C++17 needed for imgui
 set(CMAKE_CXX_STANDARD 17)
-# set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
+set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
 
 
 add_subdirectory(src)
