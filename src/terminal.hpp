@@ -1,31 +1,36 @@
+#pragma once
+
 /**
 * Terminal manager
 */
 
-#include <iostream>
-#include <vector>
-#include <string>
+#include <utility>
 
-namespace terminal {
+// Alternate screen
+#define ATTR_ALT_SCREEN 1049
+// Show cursor
+#define ATTR_SH_CURSOR 25
+
+namespace tren {
 	/**
 	 * Set raw mode for terminal
 	 */
 	void raw(bool enable);
 
 	/**
-	 * Switch to alternate screen
-	 */
-	void alternate_screen(bool enable);
+	* Enable attribute
+	*/
+	void attrOn(int attr);
 
 	/**
-	 * Display cursor
-	 */
-	void display_cursor(bool enable);
+	* Disable attribute
+	*/
+	void attrOff(int attr);
 
 	/**
 	 * Get window size
 	 * 
-	 * @returns pair (columns/width, lines/height)
+	 * @returns pair (columns, lines)
 	 */
-	std::pair<unsigned short, unsigned short> get_win_size();
-};
+	std::pair<int, int> getScreenSize();
+}

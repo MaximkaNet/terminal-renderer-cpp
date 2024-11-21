@@ -1,12 +1,20 @@
 #include "terminal.hpp"
+
+#include <iostream>
+
 #ifdef _WIN32
+
 #include <Windows.h>
+
 #else
+
 #include <termios.h>
 #include <unistd.h>
 #include <sys/ioctl.h>
+
 #endif
-void terminal::raw(bool enable) {
+
+void tren::raw(bool enable) {
 	#ifndef _WIN32
 	static struct termios orig_term;
 	if(enable) {
@@ -39,17 +47,18 @@ void terminal::raw(bool enable) {
 	#endif
 }
 
-void terminal::alternate_screen(bool enable) {
-	std::cout << "\033[?1049" << (enable ? "h" : "l") << std::flush; 
+void tren::attrOn(int attr)
+{
+	std::cout << "\033[?" << attr << "h" << std::flush;
 }
 
-
-void terminal::display_cursor(bool enable) {
-	std::cout << "\033[?25" << (enable ? "h" : "l") << std::flush;
+void tren::attrOff(int attr)
+{
+	std::cout << "\033[?" << attr << "l" << std::flush;
 }
 
-std::pair<unsigned short, unsigned short> terminal::get_win_size() {
-	unsigned short cols, rows;
+std::pair<int, int> tren::getScreenSize() {
+	int cols, rows;
 	#ifndef _WIN32
 	winsize w;
 	if (ioctl(STDOUT_FILENO, TIOCGWINSZ, &w) == -1) {

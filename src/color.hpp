@@ -1,19 +1,27 @@
 #pragma once
 
-/**
- * Pixel color
- */
-struct color {
-    unsigned short r = 0, g = 0, b = 0;
-
+namespace tren {
     /**
-     * Convert from hex to color
+     * Pixel color
      */
-    static color hex(unsigned int hex);
+    struct color {
+        unsigned short r = 0;
+        unsigned short g = 0;
+        unsigned short b = 0;
 
-    bool operator==(const color& rhs);
-    bool operator!=(const color& rhs);
+        color();
+        color(unsigned short r, unsigned short g, unsigned short b);
+        color(unsigned int hex);
 
-    friend bool operator==(const color& lhs, const color& rhs);
-    friend bool operator!=(const color& lhs, const color& rhs);
-};
+        /**
+         * Convert from hex to color
+         */
+        static color of(unsigned int hex);
+
+        bool operator==(const color& rhs);
+        bool operator!=(const color& rhs);
+
+        friend bool operator==(const color& lhs, const color& rhs);
+        friend bool operator!=(const color& lhs, const color& rhs);
+    };
+}

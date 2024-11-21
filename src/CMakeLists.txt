@@ -2,21 +2,19 @@ set(RENDERER_NAME renderer)
 
 
 set(RENDERER_SOURCE_FILES
+	resources.cpp
+	color.cpp
+	frame.cpp
+	frame_unit.cpp
 	renderer.cpp
-	color.hpp
-	frame.hpp
-	frame_unit.hpp
-	image.hpp
-	renderer.cpp
-	renderer.hpp
 	terminal.cpp
-	terminal.hpp
-	
+	utils.cpp
 )
 
 set(RENDERER_API_FILES
-	../include/terminal/terminal.hpp
+	../include/terminal/renderer.hpp
 	../include/terminal/utils.hpp
+	../include/terminal/resources.hpp
 )
 
 # Hide internal functions
@@ -57,7 +55,7 @@ if (MSVC)
 	message(STATUS "Box2D on MSVC")	
 	if (BUILD_SHARED_LIBS)
 		# this is needed by DLL users to import Box2D symbols
-		target_compile_definitions(box2d INTERFACE BOX2D_DLL)
+		#target_compile_definitions(box2d INTERFACE BOX2D_DLL)
 	endif()
 
 	# All warnings
