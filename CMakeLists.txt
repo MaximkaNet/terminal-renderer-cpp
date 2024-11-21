@@ -12,3 +12,4 @@ set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
 
 add_subdirectory(src)
 add_subdirectory(test)
+add_subdirectory(performance_test)
