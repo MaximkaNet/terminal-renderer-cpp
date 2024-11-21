@@ -20,7 +20,7 @@ target_link_libraries(<app_name> PRIVATE tren)
 
 ## Using
 Initialize Terminal Renderer
-```
+```cpp
 tren::init();
 // or
 // tren::init(width, height);
