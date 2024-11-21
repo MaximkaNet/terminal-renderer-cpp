@@ -1,8 +1,8 @@
 #include "config.cpp"
 
 #include <iostream>
-#include <terminal/renderer.hpp>
-#include <terminal/utils.hpp>
+#include <tren/renderer.hpp>
+#include <tren/utils.hpp>
 
 #include <thread>
 #include <chrono>

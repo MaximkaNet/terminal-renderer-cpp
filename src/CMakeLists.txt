@@ -16,9 +16,9 @@ set(RENDERER_SOURCE_FILES
 )
 
 set(RENDERER_API_FILES
-	../include/terminal/renderer.hpp
-	../include/terminal/utils.hpp
-	../include/terminal/resources.hpp
+	../include/tren/renderer.hpp
+	../include/tren/utils.hpp
+	../include/tren/resources.hpp
 )
 
 # Hide internal functions

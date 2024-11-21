@@ -1,5 +1,5 @@
-#include <terminal/renderer.hpp>
-#include <terminal/resources.hpp>
+#include <tren/renderer.hpp>
+#include <tren/resources.hpp>
 
 #include <iostream>
 #include <catch2/catch_test_macros.hpp>

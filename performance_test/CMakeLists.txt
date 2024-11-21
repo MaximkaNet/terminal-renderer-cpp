@@ -13,4 +13,4 @@ set_target_properties(test PROPERTIES
 
 target_include_directories("perf_test" PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
-target_link_libraries("perf_test" PRIVATE renderer)
+target_link_libraries("perf_test" PRIVATE tren)

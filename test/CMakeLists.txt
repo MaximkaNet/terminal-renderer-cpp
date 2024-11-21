@@ -22,4 +22,4 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(Catch2)
 
-target_link_libraries(test PRIVATE renderer Catch2::Catch2WithMain)
+target_link_libraries(test PRIVATE tren Catch2::Catch2WithMain)
