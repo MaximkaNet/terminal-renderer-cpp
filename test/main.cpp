@@ -86,3 +86,41 @@ TEST_CASE("Drawing pixel", "[renderer]") {
 
 	tren::endwin();
 }
+
+TEST_CASE("Clear and refresh", "[renderer]") {
+	tren::init(16, 16);
+
+	CHECK(tren::getBufferWidth() * tren::getBufferHeight() == 16 * 16);
+	CHECK(tren::getBufferWidth() == 16);
+	CHECK(tren::getBufferHeight() == 16);
+
+	tren::RectDef rectDef;
+	rectDef.width = 10;
+	rectDef.height = 10;
+	rectDef.ch = '#';
+
+	tren::drawRect(rectDef);
+
+	tren::clear();
+
+	int size = tren::getBufferWidth() * tren::getBufferHeight();
+
+	tren::FrameUnit* ptr = tren::getVirtualBuffer();
+
+	for(int i = 0; i < size; i++)
+	{
+		REQUIRE(ptr->m_char == FUNIT_DEFAULT_CHAR);
+		ptr++;
+	}
+
+	tren::refresh();
+
+	ptr = tren::getBuffer();
+
+	for (int i = 0; i < size; i++)
+	{
+		REQUIRE(ptr[i].m_char == FUNIT_DEFAULT_CHAR);
+	}
+
+	tren::endwin();
+}
