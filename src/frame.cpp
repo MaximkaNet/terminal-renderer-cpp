@@ -23,7 +23,7 @@ void tren::drawRect(const tren::RectDef& rectDef) {
             FrameUnit f_unit = { rectDef.ch, rectDef.backgroundColor, rectDef.color };
 
             int pos = pos_x + pos_y * frame_width;
-            *(tren::getVirtualBuffer() + pos) = f_unit;
+            tren::getVirtualBuffer()[pos] = f_unit;
         }
     }
 }
@@ -47,17 +47,17 @@ void tren::drawText(const tren::TextDef& textDef) {
         FrameUnit unit = { ch, textDef.backgroundColor, textDef.color };
 
         int pos = pos_y * tren::getBufferWidth() + pos_x;
-        *(tren::getVirtualBuffer() + pos) = unit;
+        tren::getVirtualBuffer()[pos] = unit;
         pos_x++;
     }
 }
 
 void tren::clear() {
     int size = tren::getBufferWidth() * tren::getBufferHeight();
+    tren::FrameUnit* buff_ptr = tren::getVirtualBuffer();
     for (int i = 0; i < size; i++)
     {
-        tren::FrameUnit* buff_ptr = tren::getVirtualBuffer();
-        *(buff_ptr + i) = tren::FrameUnit();
+        buff_ptr[i] = tren::FrameUnit();
     }
 }
 
@@ -97,5 +97,5 @@ void tren::drawPixel(const tren::PixelDef& pixelDef) {
     // TODO throw exception?
     if (pos > buf_size - 1 || pos < 0) return;
 
-    *(tren::getVirtualBuffer() + pos) = pixelDef.unit;
+    tren::getVirtualBuffer()[pos] = pixelDef.unit;
 }

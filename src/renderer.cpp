@@ -3,6 +3,8 @@
 #include "terminal.hpp"
 #include "utils.hpp"
 
+#include <sstream>
+
 void tren::init() {
 	// auto detect window size
 	auto size = tren::getScreenSize();
@@ -22,6 +24,11 @@ void tren::refresh()
 	auto compared = compareBuffers(tren::getBufferWidth(), tren::getBufferHeight(), buff_ptr, virt_buff_ptr);
 
 	// Pring different frame units
+
+	std::stringstream ss;
+
+	ss << std::noskipws;
+
 	for (const ComparedFrameUnit& unit: compared) {
 		// Update real buffer
 		int pos = unit.x + unit.y * getBufferWidth();
@@ -29,12 +36,12 @@ void tren::refresh()
 		// Skip units that out of the buffer
 		if (pos < 0 || pos >= getBufferWidth() * getBufferHeight()) continue;
 
-		*(tren::getBuffer() + pos) = unit.ref;
+		tren::getBuffer()[pos] = unit.ref;
 
-		std::string compiled = compileFrameUnit(unit.ref, unit.x, unit.y);
-
-		printf_s(compiled.c_str());
+		ss << compileFrameUnit(unit.ref, unit.x, unit.y);
 	}
+
+	printf(ss.str().c_str());
 }
 
 void tren::endwin()

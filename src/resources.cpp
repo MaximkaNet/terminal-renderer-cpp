@@ -31,8 +31,8 @@ void tren::resizeBuffers(int w, int h)
 	frame_width = w;
 	frame_height = h;
 
-	buffer = new tren::FrameUnit[w * h];
-	virtual_buffer = new tren::FrameUnit[w * h];
+	buffer = new tren::FrameUnit[w * h]{};
+	virtual_buffer = new tren::FrameUnit[w * h]{};
 }
 
 void tren::cleanResources() {
