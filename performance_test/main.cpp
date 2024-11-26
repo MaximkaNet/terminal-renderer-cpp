@@ -7,25 +7,6 @@
 #include <mutex>
 #include <vector>
 
-void drawRect(int x, int y, int w, int h, char ch, tren::color bg, tren::color fg) {
-	tren::PixelDef pixelDef;
-
-	for (int j = 0; j < h; j++)
-	{
-		for (int k = 0; k < w; k++)
-		{
-			pixelDef.unit = tren::FrameUnit();
-			pixelDef.unit.m_char = ch;
-			pixelDef.unit.m_bg = bg;
-			pixelDef.unit.m_fg = fg;
-			pixelDef.x = x + k;
-			pixelDef.y = y + j;
-
-			tren::drawPixel(pixelDef);
-		}
-	}
-}
-
 struct Rect {
 	int x = 0;
 	int y = 0;
@@ -42,10 +23,6 @@ int main() {
 	tren::raw(true);
 	tren::attrOn(ATTR_ALT_SCREEN);
 	tren::attrOff(ATTR_SH_CURSOR);
-
-	tren::TextDef textDef;
-
-	tren::PixelDef pixelDef;
 
 	std::mutex mtx;
 
@@ -78,13 +55,13 @@ int main() {
 		tren::clear();
 
 		for (Rect& rect : rects) {
-			drawRect(rect.x, rect.y, rect.w, rect.h, rect.ch, rect.bg, rect.fg);
+			//drawRect(rect.x, rect.y, rect.w, rect.h, rect.ch, rect.bg, rect.fg);
+			tren::drawRectFilled(rect.x, rect.y, rect.w, rect.h, rect.ch);
 			rect.x++;
 		}
 
-		textDef.content = "Current step: " + std::to_string(step);
-
-		tren::drawText(textDef);
+		std::string currentStep = "Current step: " + std::to_string(step);
+		tren::drawText(0, 0, currentStep.c_str());
 
 		tren::refresh();
 
