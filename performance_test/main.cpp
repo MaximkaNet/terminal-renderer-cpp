@@ -1,5 +1,3 @@
-#include "config.cpp"
-
 #include <iostream>
 #include <tren/renderer.hpp>
 #include <tren/utils.hpp>
@@ -74,7 +72,7 @@ int main() {
 	int step = 0;
 	while (step < 500)
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(16));
+		std::this_thread::sleep_for(std::chrono::milliseconds(32));
 		std::lock_guard<std::mutex> l(mtx);
 
 		tren::clear();
@@ -90,15 +88,17 @@ int main() {
 
 		tren::refresh();
 
-		Rect rect;
-		rect.x = rand() % 10;
-		rect.y = rand() % 50;
-		rect.w = rand() % 30;
-		rect.h = rand() % 10;
-		rect.ch = rand() % 10 + 97;
-		rect.fg = colors[rand() % colors.size()];
+		if (rects.size() < 200) {
+			Rect rect;
+			rect.x = rand() % 10;
+			rect.y = rand() % 50;
+			rect.w = rand() % 30 + 5;
+			rect.h = rand() % 10 + 5;
+			rect.ch = rand() % 10 + 97;
+			rect.fg = colors[rand() % colors.size()];
 
-		rects.push_back(rect);
+			rects.push_back(rect);
+		}
 
 		step++;
 	}

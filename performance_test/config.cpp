@@ -1,2 +1,0 @@
-#define FUNIT_DEFAULT_CHAR ' '
-//#define FUNIT_DEFAULT_BG_COLOR 0xe76f51
