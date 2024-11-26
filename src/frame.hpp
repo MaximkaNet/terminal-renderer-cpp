@@ -5,41 +5,15 @@
 
 namespace tren {
 
-    struct TextDef {
-        std::string content = "";
-        tren::color color = FUNIT_DEFAULT_FG_COLOR;
-        tren::color backgroundColor = FUNIT_DEFAULT_BG_COLOR;
-        int x = 0;
-        int y = 0;
-    };
-
-    struct RectDef
-    {
-        int x = 0;
-        int y = 0;
-        int width = 0;
-        int height = 0;
-        char ch = FUNIT_DEFAULT_CHAR;
-        tren::color color = FUNIT_DEFAULT_FG_COLOR;
-        tren::color backgroundColor = FUNIT_DEFAULT_BG_COLOR;
-    };
-
-    struct PixelDef
-    {
-        int x = 0;
-        int y = 0;
-        tren::FrameUnit unit;
-    };
-
     /**
      * Draw rectangle using definition
      */
-    void drawRect(const RectDef& rectDef);
+    void drawRectFilled(int x, int y, int w, int h, char ch);
 
     /**
      * Draw text on the screen
      */
-    void drawText(const TextDef& textDef);
+    void drawText(int x, int y, const char* str);
 
     /**
      * Clear rectangle space
@@ -57,8 +31,8 @@ namespace tren {
     void drawImage(/*TODO draw image*/);
 
     /**
-     * Set pixel
+     * Draw pixel
      */
-    void drawPixel(const tren::PixelDef& frameUnit);
+    void drawPixel(int x, int y, char ch);
 
 }

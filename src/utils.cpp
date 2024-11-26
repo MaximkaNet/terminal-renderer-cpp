@@ -21,20 +21,20 @@ std::vector<ComparedFrameUnit> compareBuffers(int width, int height, tren::Frame
 }
 
 bool areFrameUnitsEqual(const tren::FrameUnit& l, const tren::FrameUnit& r) {
-	return l.m_char == r.m_char && l.m_bg == r.m_bg && l.m_fg == r.m_fg;
+	return l.m_char == r.m_char && l.m_color == r.m_color;
 }
 
 std::string compileFrameUnit(const tren::FrameUnit& ref, int x, int y, int offX, int offY)
 {
 	std::string u = "\033[" + compilePos(x + offX, y + offY) + "H";
 
-	const tren::color& bg = ref.m_bg;
-	const tren::color& fg = ref.m_fg;
+	/*const tren::color& bg = ref.m_bg;
+	const tren::color& fg = ref.m_fg;*/
 
 	// Compile foreground color
-	u += "\033[38:2::" + compileColor(fg) + "m";
+	u += "\033[38:2::" + compileColor(ref.m_color) + "m";
 	// Compile background color
-	u += "\033[48:2::" + compileColor(bg) + "m";
+	//u += "\033[48:2::" + compileColor(bg) + "m";
 
 	u += ref.m_char;
 	u += "\033[0m";

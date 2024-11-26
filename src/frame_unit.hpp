@@ -2,16 +2,12 @@
 
 #include "color.hpp"
 
-#ifndef FUNIT_DEFAULT_BG_COLOR
-#define FUNIT_DEFAULT_BG_COLOR (int) 0x000000
-#endif
-
-#ifndef FUNIT_DEFAULT_FG_COLOR
-#define FUNIT_DEFAULT_FG_COLOR (int) 0xFFFFFF
+#ifndef FUNIT_DEFAULT_COLOR
+#define FUNIT_DEFAULT_COLOR (int) 0xFFFFFF
 #endif
 
 #ifndef FUNIT_DEFAULT_CHAR
-#define FUNIT_DEFAULT_CHAR 0x0
+#define FUNIT_DEFAULT_CHAR 0x20
 #endif
 
 namespace tren {
@@ -22,7 +18,6 @@ namespace tren {
     struct FrameUnit
     {
         char m_char = FUNIT_DEFAULT_CHAR;
-        color m_bg = FUNIT_DEFAULT_BG_COLOR;
-        color m_fg = FUNIT_DEFAULT_FG_COLOR;
+        color m_color = FUNIT_DEFAULT_COLOR;
     };
 }

@@ -1,54 +1,36 @@
 #include "frame.hpp"
 #include "resources.hpp"
 
-void tren::drawRect(const tren::RectDef& rectDef) {
-    int frame_width = tren::getBufferWidth();
-    int frame_height = tren::getBufferHeight();
-
-    int width = rectDef.width;
-    int height = rectDef.height;
-
-    int pos_x = rectDef.x;
-    int pos_y = rectDef.y;
-
-    for (int j = 0; j < height; j++) {
-        if (pos_y > frame_height - 1) break;
-        else if (pos_y < 0) continue;
-        for (int i = 0; i < width; i++) {
-            pos_x = rectDef.x + i;
-            // Pixel by x axis on screen?
-            if (pos_x > frame_width - 1) break;
-            else if (pos_x < 0) continue;
-
-            FrameUnit f_unit = { rectDef.ch, rectDef.backgroundColor, rectDef.color };
-
-            int pos = pos_x + pos_y * frame_width;
-            tren::getVirtualBuffer()[pos] = f_unit;
+void tren::drawRectFilled(int x, int y, int w, int h, char ch) {
+    for (int j = 0; j < h; j++) {
+        for (int i = 0; i < w; i++)
+        {
+            drawPixel(x + i, y + j, ch);
         }
     }
 }
 
-void tren::drawText(const tren::TextDef& textDef) {
-
+void tren::drawText(int x, int y, const char* str) {
     // TODO throw exception here?
-    if (textDef.content.empty()) return;
+    if (str == nullptr) return;
 
-    int pos_x = textDef.x;
-    int pos_y = textDef.y;
-    for (const char ch : textDef.content) {
-        if (ch == '\n') {
+    int pos_x = x;
+    int pos_y = y;
+
+    while (*str) {
+
+        if (*str == '\n') {
             pos_y++;
-            pos_x = textDef.x;
-            continue;
+            pos_x = x;
+            str++;
         }
-        if (pos_x > tren::getBufferWidth() - 1 || pos_x < 0 || pos_y < 0) continue;
+
+        if (pos_x < 0 || pos_y < 0 || pos_x > tren::getBufferWidth() - 1) { str++; continue; }
         if (pos_y > tren::getBufferHeight() - 1) break;
 
-        FrameUnit unit = { ch, textDef.backgroundColor, textDef.color };
-
-        int pos = pos_y * tren::getBufferWidth() + pos_x;
-        tren::getVirtualBuffer()[pos] = unit;
+        drawPixel(pos_x, pos_y, *str);
         pos_x++;
+        str++;
     }
 }
 
@@ -89,17 +71,17 @@ void tren::drawImage() {
     throw std::exception("Not implemented yet");
 }
 
-void tren::drawPixel(const tren::PixelDef& pixelDef) {
+void tren::drawPixel(int x, int y, char ch) {
     int frame_width = tren::getBufferWidth();
     int frame_height = tren::getBufferHeight();
     const int buf_size = tren::getBufferWidth() * tren::getBufferHeight();
 
-    if (pixelDef.x < 0 || pixelDef.x > frame_width - 1) return;
-    else if (pixelDef.y < 0 || pixelDef.y > frame_height - 1) return;
+    if (x < 0 || x > frame_width - 1) return;
+    else if (y < 0 || y > frame_height - 1) return;
 
-    int pos = pixelDef.x + pixelDef.y * frame_width;
+    int pos = x + y * frame_width;
     // TODO throw exception?
     if (pos > buf_size - 1 || pos < 0) return;
 
-    tren::getVirtualBuffer()[pos] = pixelDef.unit;
+    tren::getVirtualBuffer()[pos] = FrameUnit{ ch, FUNIT_DEFAULT_COLOR };
 }
