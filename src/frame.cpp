@@ -91,7 +91,11 @@ void tren::drawImage() {
 
 void tren::drawPixel(const tren::PixelDef& pixelDef) {
     int frame_width = tren::getBufferWidth();
+    int frame_height = tren::getBufferHeight();
     const int buf_size = tren::getBufferWidth() * tren::getBufferHeight();
+
+    if (pixelDef.x < 0 || pixelDef.x > frame_width - 1) return;
+    else if (pixelDef.y < 0 || pixelDef.y > frame_height - 1) return;
 
     int pos = pixelDef.x + pixelDef.y * frame_width;
     // TODO throw exception?

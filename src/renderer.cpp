@@ -13,8 +13,6 @@ void tren::init() {
 }
 
 void tren::init(int w, int h) {
-	std::ios::sync_with_stdio(false);
-
 	tren::resizeBuffers(w, h);
 	tren::attrOn(ATTR_ALT_SCREEN);
 }
@@ -49,7 +47,6 @@ void tren::refresh()
 
 void tren::endwin()
 {
-	std::ios::sync_with_stdio(true);
 	tren::cleanResources();
 
 	tren::attrOff(ATTR_ALT_SCREEN);
